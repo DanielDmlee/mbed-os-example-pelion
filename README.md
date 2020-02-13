@@ -1,3 +1,46 @@
+# Pelion Device Management Client example
+This example included dedicated setting for MNO of Korea 
+
+## 1. Cat.M1 of SKtelecom.
+You can use BG96 for Cat.M1 of SKTelecom(SKT) in Korea. The drivers for the BG96 are already included in Mbed by default. However, SKT requires IPV6 configure, you can without patches after Mbed OS 5.13. The configure required in mbed_app.json are as shown below.
+
+`Just copy SKT_CatM1_mbed_app.json to mbed_app.json`
+```
+            "lwip.ipv4-enabled": false,
+            "lwip.ipv6-enabled": true,
+            "lwip.ethernet-enabled": false,
+            "lwip.ppp-enabled": false,
+            "lwip.tcp-enabled": true,
+            ...
+            "nsapi.default-cellular-apn": "\"lte-internet.sktelecom.com\"",
+```
+Test board is,
+
+ - [WIZnet BG96 board](https://github.com/Wiznet/wiznet-iot-shield-mbed-kr)
+ - [M2Mnet BG96 module](http://m2mnet.net/index/bbs/board.php?bo_table=pro02&wr_id=2)
+
+** The other BG96 is not support due to local policy(Requires certified firmware for each country)
+
+if you use under Mbed OS 5.12, please see https://os.mbed.com/users/Daniel_Lee/code/mbed-os-example-cellular-BG96/ for more information.
+
+
+
+## 2. NB-IoT of LGU plus
+You can use SERCOM([TPB23](https://www.sercomm.com/contpage.aspx?langid=1&type=prod3&L1id=2&L2id=3&L3id=97&Prodid=701)) for NB-IoT of LGU plus(LGU+) in Korea. The NB-IoT module's seller provided a document on how to start based on Mbed OS 5.11, created by [CodeZoo](https://github.com/codezoo-ltd/NB-IoT_MbedOS)). The other latest version is prepared https://github.com/DanielDmlee/TPB23_Driver, and if you need to mbed-os-example-cellular based code, then please see [mbed-os-example-cellular-TPB23](https://os.mbed.com/users/Daniel_Lee/code/mbed-os-example-cellular-TPB23//file/006469f922f6/TPB23_Driver.lib/). The configure required in mbed_app.json are as shown below.
+
+`Just copy LGU_NBIoT_mbed_app.json to mbed_app.json`
+```
+            "lwip.ipv4-enabled": true,
+            "lwip.ethernet-enabled": false,
+            "lwip.ppp-enabled": false,
+            "lwip.tcp-enabled": true,
+```
+Test board is,
+
+ - [CodeZoo NB-IoT board](http://mechasolution.com/shop/goods/goods_view.php?goodsno=583929&category=132030)
+
+------------------------
+
 # Pelion Device Management Client example for Mbed OS
 
 This is an basic Device Management client example for Mbed OS with the following features:
