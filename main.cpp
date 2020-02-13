@@ -133,6 +133,28 @@ int main(void)
 {
     int status;
 
+    printf("===  MNO demo of Korea  ===\n");
+#if MBED_CONF_SERCOMM_TPB23_PROVIDE_DEFAULT == 1
+    DigitalOut TPB23_RESET(A1);
+    TPB23_RESET = 0;    /* 0: Standby 1: Reset */
+    printf("\nLGU + - SERCOM TPB23 Standby\n");
+#elif MBED_CONF_QUECTEL_BG96_PROVIDE_DEFAULT == 1
+    DigitalOut BG96_RESET(D7);
+    DigitalOut BG96_PWRKEY(D9);
+ 
+    BG96_RESET = 1;
+    BG96_PWRKEY = 1;
+    wait_ms(200);
+ 
+    BG96_RESET = 0;
+    BG96_PWRKEY = 0;
+    wait_ms(300);
+ 
+    BG96_RESET = 1;
+    wait_ms(5000);
+    printf("\nSKT - QUECTEL BG96 Standby\n");
+#endif
+ 
     status = mbed_trace_init();
     if (status != 0) {
         printf("mbed_trace_init() failed with %d\n", status);
